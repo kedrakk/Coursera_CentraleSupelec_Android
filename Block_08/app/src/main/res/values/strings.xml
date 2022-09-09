@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Block_08</string>
+    <string name="enter">Enter</string>
+    <string name="click_the_stars_to_rate">Click the stars to rate</string>
+    <string name="welcome_to_second_activity">Welcome to second activity</string>
+    <string name="welcome_to_second">\"Welcome to second activity! Your rating is \"</string>
+</resources>
