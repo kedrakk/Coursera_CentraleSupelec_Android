@@ -12,4 +12,5 @@ Coursera Android Course Exercises
 9. Block08-Passing data to a new activity (Week4 Lecture)
 10. Block09-Implicit intent to sms (Week4 Lecture)
 11. Block10-Life cycles (Week4 Lecture)
+12. EmotioAssignmentProject (Final Certificate Assignment)
 
