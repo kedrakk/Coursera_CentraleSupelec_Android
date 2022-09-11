@@ -7,13 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class CustomAdaptar extends BaseAdapter {
     Context context;
-    int[] allEmotions;
+    EmotionData[] allEmotions;
     LayoutInflater inflater;
 
-    public CustomAdaptar(Context appContext,int[] emotions){
+    public CustomAdaptar(Context appContext,EmotionData[] emotions){
         this.context=appContext;
         this.allEmotions=emotions;
         this.inflater=(LayoutInflater.from(appContext));
@@ -38,8 +40,10 @@ public class CustomAdaptar extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         view=inflater.inflate(R.layout.activity_imageview,null);
-        ImageButton imageButton=view.findViewById(R.id.emotionIcon);
-        imageButton.setImageResource(allEmotions[i]);
+        ImageView imageButton=view.findViewById(R.id.emotionIcon);
+        imageButton.setImageResource(allEmotions[i].imageId);
+        TextView textView=view.findViewById(R.id.emotionName);
+        textView.setText(allEmotions[i].emotionName);
         return view;
     }
 }

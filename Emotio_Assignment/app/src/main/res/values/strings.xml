@@ -2,4 +2,5 @@
     <string name="app_name">Emotio_Assignment</string>
     <string name="click_the_emotion_to_learn">Click the emotion to learn</string>
     <string name="happy">Happy</string>
+    <string name="selected_emotion">Selected Emotion</string>
 </resources>
