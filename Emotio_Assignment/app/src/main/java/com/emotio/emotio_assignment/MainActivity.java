@@ -4,7 +4,6 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.widget.GridView;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     };
     EmotionData selectedEmotion;
     TextView selectedEmotionText;
+    MediaPlayer mediaPlayer;
+    TextView titleText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,19 +30,27 @@ public class MainActivity extends AppCompatActivity {
         CustomAdaptar customAdaptar=new CustomAdaptar(getApplicationContext(),emotionData);
         emotionsGrid.setAdapter(customAdaptar);
 
+        titleText=findViewById(R.id.click_emotion);
+
         selectedEmotionText=findViewById(R.id.selected_emotion_text);
-        selectedEmotionText.setVisibility(TextView.INVISIBLE);
+        selectedEmotionText.setVisibility(TextView.GONE);
+
         emotionsGrid.setOnItemClickListener((adapterView, view, i, l) -> {
             selectedEmotion=emotionData[i];
             setEmotionView(selectedEmotion);
         });
     }
 
+
     void setEmotionView(EmotionData lastEmotion){
+        titleText.setVisibility(TextView.GONE);
         selectedEmotionText.setVisibility(TextView.VISIBLE);
         selectedEmotionText.setText(lastEmotion.emotionName);
         selectedEmotionText.setCompoundDrawablesWithIntrinsicBounds(0,lastEmotion.imageId,0,0);
-        MediaPlayer mediaPlayer=MediaPlayer.create(this,lastEmotion.emotionRawData);
+        if(mediaPlayer!=null&&mediaPlayer.isPlaying()){
+            mediaPlayer.stop();
+        }
+        mediaPlayer=MediaPlayer.create(this,lastEmotion.emotionRawData);
         mediaPlayer.start();
     }
 }
