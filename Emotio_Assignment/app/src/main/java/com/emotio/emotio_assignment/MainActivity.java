@@ -1,25 +1,24 @@
 package com.emotio.emotio_assignment;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     GridView emotionsGrid;
     EmotionData[] emotionData={
-            new EmotionData(R.drawable.happy,"Happy"),
-            new EmotionData(R.drawable.happy,"Sad"),
-            new EmotionData(R.drawable.happy,"Angry"),
-            new EmotionData(R.drawable.happy,"Sleepy"),
-            new EmotionData(R.drawable.happy,"Silly"),
-            new EmotionData(R.drawable.happy,"Wink"),
+            new EmotionData(R.drawable.happy,"Happy",R.raw.happy),
+            new EmotionData(R.drawable.sad,"Sad",R.raw.sad),
+            new EmotionData(R.drawable.angry,"Angry",R.raw.angry),
+            new EmotionData(R.drawable.sleepy,"Sleepy",R.raw.sleepy),
+            new EmotionData(R.drawable.sick,"Sick",R.raw.sick),
+            new EmotionData(R.drawable.scared,"Scared",R.raw.scared),
     };
     EmotionData selectedEmotion;
+    TextView selectedEmotionText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,19 +29,19 @@ public class MainActivity extends AppCompatActivity {
         CustomAdaptar customAdaptar=new CustomAdaptar(getApplicationContext(),emotionData);
         emotionsGrid.setAdapter(customAdaptar);
 
-        TextView selectedEmotionText=findViewById(R.id.selected_emotion_text);
+        selectedEmotionText=findViewById(R.id.selected_emotion_text);
         selectedEmotionText.setVisibility(TextView.INVISIBLE);
-        emotionsGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                selectedEmotion=emotionData[i];
-                selectedEmotionText.setVisibility(TextView.VISIBLE);
-                selectedEmotionText.setText(selectedEmotion.emotionName);
-                selectedEmotionText.setCompoundDrawablesWithIntrinsicBounds(0,selectedEmotion.imageId,0,0);
-            }
+        emotionsGrid.setOnItemClickListener((adapterView, view, i, l) -> {
+            selectedEmotion=emotionData[i];
+            setEmotionView(selectedEmotion);
         });
+    }
 
-
-
+    void setEmotionView(EmotionData lastEmotion){
+        selectedEmotionText.setVisibility(TextView.VISIBLE);
+        selectedEmotionText.setText(lastEmotion.emotionName);
+        selectedEmotionText.setCompoundDrawablesWithIntrinsicBounds(0,lastEmotion.imageId,0,0);
+        MediaPlayer mediaPlayer=MediaPlayer.create(this,lastEmotion.emotionRawData);
+        mediaPlayer.start();
     }
 }
