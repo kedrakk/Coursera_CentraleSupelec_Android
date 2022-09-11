@@ -30,6 +30,11 @@
             android:layout_marginTop="@dimen/spacingFifteen"
             android:layout_marginBottom="@dimen/spacingFifteen"/>
 
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/media_progress"/>
+
     <GridView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
